@@ -4,9 +4,11 @@ defmodule GithubSearch.CLI do
   """
 
   def main(args \\ []) do
-    options = [switches: [file: :string], aliases: [f: :file]]
-    {opts,_,_}= OptionParser.parse(args, options)
-    
-    IO.inspect opts, label: "Command Line Arguments"
+    options = [strict: [username: :string, project: :string]]
+    {opts ,_ ,_ } = OptionParser.parse(args, options)
+
+    GithubSearch.process_parser(opts)
+    |> IO.inspect
+    |> GithubSearch.Display.display_info
   end
 end

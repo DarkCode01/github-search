@@ -23,6 +23,7 @@ defmodule GithubSearch.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.6"},
+      {:poison, "~> 4.0"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false}
     ]
   end
