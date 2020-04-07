@@ -1,6 +1,4 @@
-# GithubSearch
-
-**TODO: Add description**
+# Github Search
 
 ## Installation
 
