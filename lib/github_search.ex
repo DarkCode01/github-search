@@ -34,5 +34,8 @@ defmodule GithubSearch do
     {:error, msg, :user}
   end
 
-  defp request_get(username), do: HTTPoison.get "https://api.github.com/users/#{username}"
+  defp request_get(username) do
+    IO.inspect "Connected with github API v3..."
+    HTTPoison.get "https://api.github.com/users/#{username}"
+  end
 end

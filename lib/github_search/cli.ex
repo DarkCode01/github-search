@@ -8,7 +8,6 @@ defmodule GithubSearch.CLI do
     {opts ,_ ,_ } = OptionParser.parse(args, options)
 
     GithubSearch.process_parser(opts)
-    |> IO.inspect
-    |> GithubSearch.Display.display_info
+    |> GithubSearch.Display.info
   end
 end

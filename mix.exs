@@ -22,8 +22,9 @@ defmodule GithubSearch.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.6"},
       {:poison, "~> 4.0"},
+      {:scribe, "~> 0.10.0"},
+      {:httpoison, "~> 1.6"},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false}
     ]
   end
