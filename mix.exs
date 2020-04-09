@@ -8,7 +8,7 @@ defmodule GithubSearch.MixProject do
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       escript: [main_module: GithubSearch.CLI],  # [Entry Point]: Configuration to make a file executable on shell.
-      deps: deps()
+      deps: deps(),
       test_coverage: [tool: ExCoveralls]
     ]
   end
@@ -26,7 +26,7 @@ defmodule GithubSearch.MixProject do
       {:poison, "~> 4.0"},
       {:scribe, "~> 0.10.0"},
       {:httpoison, "~> 1.6"},
-      {:excoveralls, "~> 0.12.3"},
+      {:excoveralls, "~> 0.12.3", only: [:test]},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false}
     ]
   end

@@ -2,7 +2,7 @@ name: Github Search - Elixir CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -24,4 +24,4 @@ jobs:
       run: mix deps.get
 
     - name: Run Tests
-      run: mix coveralls.github
+      run: mix test
