@@ -1,4 +1,5 @@
 # Github Search ⚙️🌍
+![Test](https://github.com/DarkCode01/github-search/workflows/Github%20Search%20-%20Elixir%20CI/badge.svg)
 
 Package to get information of a github's user, this package is a practice to get more experience working with `Elixir`.
 
