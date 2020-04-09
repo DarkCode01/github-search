@@ -13,12 +13,38 @@ defmodule GithubSearch do
       {:error, "Username not found or invalid, :(", :user}
 
   """
+  defstruct [
+    :login,
+    :name,
+    :bio,
+    :followers,
+    :following
+  ]
+
   require HTTPoison
   import Poison, only: [decode!: 1]
 
+  defimpl Inspect, for: GithubSearch do
+    def inspect(data, _) do
+      """
 
-  def process_parser([username: username]), do: get_user_info(username)
-  def process_parser([project: project]), do: {:ok, project}
+        [#{data.login}] - #{data.name}
+        
+        #{data.bio}
+
+        Followers: (#{data.followers}) - Following: (#{data.following})
+        
+      """
+    end
+  end
+
+  def process_parser([username: username]) do
+    get_user_info(username)
+  end
+  
+  def process_parser([project: project]) do
+    {:ok, project}
+  end
 
   def get_user_info(username) do
     case request_get(username) do
@@ -30,8 +56,25 @@ defmodule GithubSearch do
         get_user_info(username, reason)
     end
   end
+  
   def get_user_info(_, msg) do
     {:error, msg, :user}
+  end
+
+  def parser_user_info({:error, msg, type}) do
+    {:error, msg, type}
+  end
+
+  def parser_user_info({:ok, info, :user}) do
+    user = %GithubSearch{
+      login: Map.get(info, "login"),
+      name: Map.get(info, "name"),
+      bio: Map.get(info, "bio"),
+      followers: Map.get(info, "followers"),
+      following: Map.get(info, "following")
+    }
+
+    {:ok, user, :user}
   end
 
   defp request_get(username) do
