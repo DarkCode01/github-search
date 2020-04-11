@@ -26,6 +26,7 @@ defmodule GithubSearch.MixProject do
       {:poison, "~> 4.0"},
       {:scribe, "~> 0.10.0"},
       {:httpoison, "~> 1.6"},
+      {:progress_bar, "~> 2.0"},
       {:excoveralls, "~> 0.12.3", only: [:test]},
       {:credo, "~> 1.3", only: [:dev, :test], runtime: false}
     ]

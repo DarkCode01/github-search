@@ -13,6 +13,15 @@ defmodule GithubSearch do
       {:error, "Username not found or invalid, :(", :user}
 
   """
+  @format [
+    bar_color: [IO.ANSI.green_background],
+    blank_color: [IO.ANSI.red_background],
+    bar: " ",
+    blank: " ",
+    left: " ",
+    right: " ",
+  ]
+  
   defstruct [
     :login,
     :name,
@@ -77,8 +86,22 @@ defmodule GithubSearch do
     {:ok, user, :user}
   end
 
-  defp request_get(username) do
-    IO.inspect "Connected with github API v3..."
-    HTTPoison.get "https://api.github.com/users/#{username}"
+  def request_get(username) do
+    # IO.inspect "Connected with github API v3..."
+    result = Task.async(HTTPoison, :get, ["https://api.github.com/users/#{username}"])
+
+    # Progress bar
+    progress([0, 100])
+    Task.await(result)
+  end
+
+  def progress([100, 100]) do
+    ProgressBar.render(100, 100, @format)
+  end
+  def progress([current, 100]) do
+    ProgressBar.render(current, 100, @format)
+    :timer.sleep(10)
+
+    progress([current + 1, 100])
   end
 end
